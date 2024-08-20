@@ -1,7 +1,7 @@
+import logging
 from flask import Flask, request, jsonify, redirect, render_template, url_for, session, flash
 from flask_jwt_extended import JWTManager, verify_jwt_in_request, jwt_required, decode_token
 from mongoengine import connect
-import logging
 from flask_session import Session
 from flask_graphql import GraphQLView
 from app.schemas import schema
