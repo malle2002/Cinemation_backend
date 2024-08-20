@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, redirect, render_template, url_for, session, flash
+from flask import Flask, logging, request, jsonify, redirect, render_template, url_for, session, flash
 from flask_jwt_extended import JWTManager, verify_jwt_in_request, jwt_required, decode_token
 from mongoengine import connect
 from flask_session import Session
@@ -36,6 +36,7 @@ def create_app():
     )
     
     MONGO_URI = os.environ.get('MONGO_URI')
+    logging.info(f"MONGO_URI: {os.getenv('MONGO_URI')}")
     connect(host=MONGO_URI)
     
     @app.before_request
