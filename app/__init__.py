@@ -37,8 +37,14 @@ def create_app():
     )
     
     MONGO_URI = os.environ.get('MONGO_URI')
+    print(MONGO_URI)
+    logging.warning(f"MONGO_URI: {os.getenv('MONGO_URI')}")
     logging.info(f"MONGO_URI: {os.getenv('MONGO_URI')}")
-    connect(host=MONGO_URI)
+    try:
+        connect(host=MONGO_URI)
+        print("MongoDB connection successful!")
+    except Exception as e:
+        print(f"Error connecting to MongoDB: {e}")
     
     @app.before_request
     def before_request():
