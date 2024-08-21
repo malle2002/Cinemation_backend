@@ -37,9 +37,6 @@ def create_app():
     )
     
     MONGO_URI = os.environ.get('MONGO_URI')
-    print(MONGO_URI)
-    logging.warning(f"MONGO_URI: {os.getenv('MONGO_URI')}")
-    logging.info(f"MONGO_URI: {os.getenv('MONGO_URI')}")
     try:
         connect(host=MONGO_URI)
         print("MongoDB connection successful!")
@@ -114,12 +111,12 @@ def create_app():
     def graphql():
         if request.method == 'OPTIONS':
             response = jsonify({})
-            response.headers.add('Access-Control-Allow-Origin', 'http://localhost:3000')
+            response.headers.add('Access-Control-Allow-Origin', 'https://cinemation-3.vercel.app')
             response.headers.add('Access-Control-Allow-Headers', 'Content-Type, Authorization')
             response.headers.add('Access-Control-Allow-Methods', 'GET, POST')
             return response
         else:
-            view = GraphQLView.as_view('graphql', schema=schema, graphiql=True)
+            view = GraphQLView.as_view('graphql', schema=schema)
             return view()
 
     @app.route('/login', methods=['GET', 'POST'])
