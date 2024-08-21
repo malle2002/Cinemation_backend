@@ -38,7 +38,7 @@ def create_app():
     
     MONGO_URI = os.environ.get('MONGO_URI')
     try:
-        connect(host=MONGO_URI)
+        connect(db='cinemacollection',host=MONGO_URI, alias='default')
         print("MongoDB connection successful!")
     except Exception as e:
         print(f"Error connecting to MongoDB: {e}")
