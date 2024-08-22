@@ -19,10 +19,6 @@ from .util.scheduler import start_scheduler
 from flask_wtf.csrf import CSRFProtect, validate_csrf
 socketio = SocketIO()
 
-async def connection():
-    MONGO_URI = os.environ.get('MONGO_URI')
-    await connect(db='cinemacollection',host=MONGO_URI,alias='default')
-
 def create_app():
     load_dotenv()
     app = Flask(__name__)
@@ -39,8 +35,10 @@ def create_app():
         api_key=os.environ.get('CLOUDINARY_API_KEY'),
         api_secret=os.environ.get('CLOUDINARY_API_SECRET')
     )
+    
+    MONGO_URI = os.environ.get('MONGO_URI')
     try:
-        connection()
+        connect(db='cinemacollection',host=MONGO_URI, alias='default')
         print("MongoDB connection successful!")
     except Exception as e:
         print(f"Error connecting to MongoDB: {e}")
