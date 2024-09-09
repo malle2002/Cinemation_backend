@@ -110,9 +110,16 @@ def create_app():
     @csrf.exempt
     def graphql():
         if request.method == 'OPTIONS':
+            allowed_origins = ['https://cinemation-3.vercel.app', 'http://localhost:3000']
+            
+            origin = request.headers.get('Origin')
             response = jsonify({})
-            response.headers.add('Access-Control-Allow-Origin', 'https://cinemation-3.vercel.app')
-            response.headers.add('Access-Control-Allow-Origin', 'http:localhost:3000')
+    
+            if origin in allowed_origins:
+                response.headers.add('Access-Control-Allow-Origin', origin)
+            else:
+                response.headers.add('Access-Control-Allow-Origin', 'null')
+            response = jsonify({})
             response.headers.add('Access-Control-Allow-Headers', 'Content-Type, Authorization')
             response.headers.add('Access-Control-Allow-Methods', 'GET, POST')
             return response
