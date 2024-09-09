@@ -27,7 +27,7 @@ def create_app():
     mail = Mail(app)
     mail.init_app(app)
     csrf = CSRFProtect(app)
-    CORS(app, resources={r"/graphql": {"origins": ["https://cinemation-3.vercel.app"]}})
+    CORS(app, resources={r"/graphql": {"origins": ["https://cinemation-3.vercel.app","localhost:3000"]}})
     jwt = JWTManager(app)
     Session(app)
     cloudinary.config(
@@ -112,6 +112,7 @@ def create_app():
         if request.method == 'OPTIONS':
             response = jsonify({})
             response.headers.add('Access-Control-Allow-Origin', 'https://cinemation-3.vercel.app')
+            response.headers.add('Access-Control-Allow-Origin', 'http:localhost:3000')
             response.headers.add('Access-Control-Allow-Headers', 'Content-Type, Authorization')
             response.headers.add('Access-Control-Allow-Methods', 'GET, POST')
             return response
