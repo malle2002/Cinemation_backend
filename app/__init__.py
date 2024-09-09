@@ -27,7 +27,7 @@ def create_app():
     mail = Mail(app)
     mail.init_app(app)
     csrf = CSRFProtect(app)
-    CORS(app, resources={r"/graphql": {"origins": ["https://cinemation-3.vercel.app","localhost:3000"]}})
+    CORS(app, resources={r"/graphql": {"origins": ["https://cinemation-3.vercel.app","http://localhost:3000"]}})
     jwt = JWTManager(app)
     Session(app)
     cloudinary.config(
